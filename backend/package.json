@@ -1,0 +1,30 @@
+{
+  "name": "ct449_fullstack_blog_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tran-Duoc/TranMinhDuoc_B2017033_CT449_DoAN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tran-Duoc/TranMinhDuoc_B2017033_CT449_DoAN/issues"
+  },
+  "homepage": "https://github.com/Tran-Duoc/TranMinhDuoc_B2017033_CT449_DoAN#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
