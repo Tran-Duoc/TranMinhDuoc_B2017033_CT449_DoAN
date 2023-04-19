@@ -36,6 +36,29 @@ const userController = {
       });
     }
   },
+  loginUser: async (req, res) => {
+    const { email, password } = req.body;
+    const findUser = await userModel.findOne({ email: email });
+    if (!findUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    console.log(findUser);
+    if (!password) {
+      return res.status(404).json({
+        success: false,
+        message: "Invalid password",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successfully",
+      user: findUser,
+    });
+  },
 };
 
 module.exports = userController;
