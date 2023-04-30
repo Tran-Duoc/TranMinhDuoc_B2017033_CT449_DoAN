@@ -21,7 +21,9 @@ const blogController = {
   getBlog: async (req, res) => {
     try {
       const { id } = req.params;
-      const blog = blogModel.findById({ _id: id });
+      ``;
+      const blog = await blogModel.findOne({ _id: id });
+
       if (blog) {
         return res.status(200).json({
           success: true,

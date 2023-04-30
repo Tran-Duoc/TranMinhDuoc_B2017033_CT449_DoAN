@@ -9,6 +9,8 @@ import Register from "../components/Register.vue";
 import Home from "../components/Home.vue";
 import PostBlog from "../components/PostBlog.vue";
 import Detail from "../components/Detail.vue";
+import UpdateBlog from "../components/UpdateBlog.vue";
+
 const routes = [
   {
     path: "/",
@@ -29,6 +31,10 @@ const routes = [
   {
     path: "/detail/:id",
     component: Detail,
+  },
+  {
+    path: "/update/:id",
+    component: UpdateBlog,
   },
 ];
 

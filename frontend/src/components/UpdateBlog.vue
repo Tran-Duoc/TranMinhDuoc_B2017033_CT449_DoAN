@@ -4,7 +4,7 @@
       class="max-w-2xl w-full p-5 text-center flex flex-col gap-2 bg-slate-50 rounded-md"
       @submit.prevent="handleSubmit"
     >
-      <Label class="text-xl font-bold uppercase mb-4">Thêm blog</Label>
+      <Label class="text-xl font-bold uppercase mb-4">Chỉnh sửa chi tiết</Label>
 
       <input
         type="text"
@@ -41,7 +41,7 @@
       <button
         class="w-full py-3 bg-green-300 mt-4 rounded-xl hover:bg-green-400/90 duration-300 font-semibold"
       >
-        Đăng bài
+        Cập nhật
       </button>
       <router-link
         to="/"
@@ -54,32 +54,52 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import https from "../utils/http.util";
-import Input from "./Input.vue";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
+
 const title = ref("");
 const content = ref("");
 const author = ref("");
 const imgPath = ref("");
 const time = ref("");
-const router = useRouter();
-const handleSubmit = () => {
-  const data = {
-    created_at: time.value,
-    title: title.value,
-    content: content.value,
-    author: author.value,
-    imgPath: imgPath.value,
-  };
+let data = {};
 
-  https.post("/item/create", data).then((response) => {
-    console.log(response);
-    if (response.statusText === "OK") {
-      alert("Tạo thành công");
-      router.push("/");
+onMounted(async () => {
+  const item = await https.get(`item/blog/${route.params.id}`);
+  console.log(item);
+  if (item.statusText === "OK") {
+    data = item.data.blog;
+    const result = item.data.blog;
+    console.log(result);
+    title.value = result.title;
+    content.value = result.content;
+    author.value = result.author;
+    imgPath.value = result.imgPath;
+    time.value = result.created_at;
+  }
+});
+const handleSubmit = async () => {
+  try {
+    const data = {
+      title: title.value,
+      author: author.value,
+      content: content.value,
+      created_at: time.value,
+      imgPath: imgPath.value,
+    };
+    console.log(data);
+    const result = await https.put(`/item/update/${route.params.id}`, data);
+    if (result.statusText === "OK") {
+      alert("Cập nhật thành công");
+      router.push(`/detail/${route.params.id}`);
     }
-  });
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 

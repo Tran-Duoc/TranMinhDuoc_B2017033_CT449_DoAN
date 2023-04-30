@@ -14,7 +14,7 @@ router.get("/blogs", getBlogs);
 
 // get blog
 
-router.get("/blog", getBlog);
+router.get("/blog/:id", getBlog);
 
 // create blog
 
